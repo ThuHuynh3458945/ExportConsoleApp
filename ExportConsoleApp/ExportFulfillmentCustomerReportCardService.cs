@@ -13,8 +13,8 @@ namespace ExportConsoleApp
 {
     public class ExportFulfillmentCustomerReportCardService
     {
-        private static PdfFont TimeNewRomanNormal => PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
-        private static PdfFont TimeBold => PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+        private static PdfFont FontNormal => PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+        private static PdfFont FontBold => PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
 
         public FulfillmentCustomerReportCardModel BuildData()
         {
@@ -686,87 +686,50 @@ namespace ExportConsoleApp
         {
             var paragraph = new Paragraph();
             paragraph.Add(new Text(cellName)
-                    .SetFont(TimeBold)
-                    .SetFontSize(frontSize))
-                    .SetFontColor(ColorConstants.BLACK)
+                    .SetFont(FontBold)
+                    .SetFontSize(frontSize)
+                    .SetFontColor(ColorConstants.BLACK))
                     ;
-
+            
             var cell = new Cell(1, colSpan);
             cell.Add(paragraph)
                 .SetBorder(Border.NO_BORDER)
-                .SetTextAlignment(TextAlignment.CENTER)
                 .SetBorderBottom(new SolidBorder(0))
-                .SetBorderTop(Border.NO_BORDER)
-                .SetBorderLeft(Border.NO_BORDER)
-                .SetBorderRight(Border.NO_BORDER)
+                .SetTextAlignment(TextAlignment.CENTER)
                 ;
 
             return cell;
         }
-
-        private static Cell AddCellNameTable(
-           string cellName,
-           int frontSize,
-           TextAlignment textAlignment = TextAlignment.LEFT,
-           bool isBold = false,
-           bool isItalic = false,
-           bool isBorder = false,
-           float paddingLeft = 0,
-           Color? backgroundColor = null)
+        
+        private static Cell AddCellValueTable(
+            string cellName,
+            int colSpan,
+            int frontSize,
+            TextAlignment textAlignment = TextAlignment.CENTER,
+            bool isBold = false,
+            bool isItalic = false,
+            bool isBorder = false,
+            float paddingLeft = 0,
+            Color? backgroundColor = null)
         {
-            var paragraph = new Paragraph();
-            paragraph.Add(new Text(cellName)
-                    .SetFont(TimeNewRomanNormal)
-                    .SetFontSize(frontSize))
-                    .SetFontColor(ColorConstants.BLACK)
-                    ;
+            var text = new Text(cellName);
+            text.SetFont(isBold ? FontBold : FontNormal)
+                .SetFontSize(frontSize)
+                .SetFontColor(ColorConstants.BLACK);
 
+            var paragraph = new Paragraph().Add(text);
             if (isItalic)
             {
                 paragraph.SetItalic();
             }
 
-            var cell = new Cell(1, 3);
+            var cell = new Cell(1, colSpan);
             cell.Add(paragraph)
-                .SetBorder(Border.NO_BORDER)
                 .SetTextAlignment(textAlignment)
-                .SetBorderTop(Border.NO_BORDER)
-                .SetBorderLeft(Border.NO_BORDER)
-                .SetBorderRight(Border.NO_BORDER)
+                .SetBorder(Border.NO_BORDER)
                 .SetBorderBottom(isBorder ? new SolidBorder(0) : Border.NO_BORDER)
                 .SetPaddingLeft(paddingLeft)
                 .SetPaddingBottom(5)
-                ;
-
-            if(backgroundColor != null)
-            {
-                cell.SetBackgroundColor(backgroundColor);
-            }
-
-            return cell;
-        }
-
-        private static Cell AddCellValueTable(
-            string cellName,
-            int colSpan,
-            int frontSize,
-            bool isBorder = false,
-            Color? backgroundColor = null)
-        {
-            var paragraph = new Paragraph();
-            paragraph.Add(new Text(cellName)
-                    .SetFont(TimeNewRomanNormal)
-                    .SetFontSize(frontSize))
-                    .SetFontColor(ColorConstants.BLACK)
-                    ;
-
-            var cell = new Cell(1, colSpan);
-            cell.Add(paragraph)
-                .SetTextAlignment(TextAlignment.CENTER)
-                .SetBorderTop(Border.NO_BORDER)
-                .SetBorderLeft(Border.NO_BORDER)
-                .SetBorderRight(Border.NO_BORDER)
-                .SetBorderBottom(isBorder ? new SolidBorder(0) : Border.NO_BORDER)
                 ;
 
             if (backgroundColor != null)
@@ -792,7 +755,7 @@ namespace ExportConsoleApp
             //Header
             var paragraph = new Paragraph();
             paragraph.Add(new Text(subject)
-                    .SetFont(TimeBold)
+                    .SetFont(FontBold)
                     .SetFontSize(font7))
                     .SetFontColor(ColorConstants.WHITE)
                     .SetTextAlignment(TextAlignment.CENTER)
@@ -986,57 +949,57 @@ namespace ExportConsoleApp
 
             #region Bind Data
             //Name
-            table.AddCell(AddCellNameTable(data.Name, font4, textAlignment, isBold, isItalic, isBorder: isBorder, paddingLeft: paddingLeft, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.Name, 3,font4, textAlignment, isBold, isItalic, isBorder, paddingLeft, backgroundColor));
 
             #region Daily
             //Actual
-            table.AddCell(AddCellValueTable(data.DailyActual, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.DailyActual, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Projected
-            table.AddCell(AddCellValueTable(data.DailyProjected, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.DailyProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. Proj
-            table.AddCell(AddCellValueTable(data.DailyActualProjected, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.DailyActualProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Prior Yr
-            table.AddCell(AddCellValueTable(data.DailyPriorYear, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.DailyPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. PY
-            table.AddCell(AddCellValueTable(data.DailyActualPriorYear, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.DailyActualPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
             #endregion Daily
 
             #region Weekly
             //Actual
-            table.AddCell(AddCellValueTable(data.WeeklyActual, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.WeeklyActual, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Projected
-            table.AddCell(AddCellValueTable(data.WeeklyProjected, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.WeeklyProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. Proj
-            table.AddCell(AddCellValueTable(data.WeeklyActualProjected, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.WeeklyActualProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Prior Yr
-            table.AddCell(AddCellValueTable(data.WeeklyPriorYear, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.WeeklyPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. PY
-            table.AddCell(AddCellValueTable(data.WeeklyActualPriorYear, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.WeeklyActualPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
             #endregion Weekly
 
             #region Monthly
             //Actual
-            table.AddCell(AddCellValueTable(data.MonthlyActual, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.MonthlyActual, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Projected
-            table.AddCell(AddCellValueTable(data.MonthlyProjected, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.MonthlyProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. Proj
-            table.AddCell(AddCellValueTable(data.MonthlyActualProjected, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.MonthlyActualProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Prior Yr
-            table.AddCell(AddCellValueTable(data.MonthlyPriorYear, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.MonthlyPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. PY
-            table.AddCell(AddCellValueTable(data.MonthlyActualPriorYear, 1, font4, isBorder, backgroundColor: backgroundColor));
+            table.AddCell(AddCellValueTable(data.MonthlyActualPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
             #endregion Monthly
 
             //cell empty
