@@ -682,6 +682,38 @@ namespace ExportConsoleApp
             return cell;
         }
 
+        private static Cell Test(string cellName, int colSpan, int frontSize)
+        {
+            var table = new Table(5);
+
+            var paragraph = new Paragraph();
+            paragraph.Add(new Text(cellName)
+                    .SetFont(FontBold)
+                    .SetFontSize(frontSize)
+                    .SetFontColor(ColorConstants.BLACK))
+                ;
+
+            var cell = new Cell(1, 55 * colSpan - 3);
+            cell.Add(paragraph)
+                .SetBorder(Border.NO_BORDER)
+                .SetBorderBottom(new SolidBorder(0))
+                .SetTextAlignment(TextAlignment.CENTER)
+                ;
+            table.AddCell(cell);
+
+            paragraph = new Paragraph();
+            paragraph.Add(new Text(""));
+            
+            cell = new Cell(1, 3);
+            cell.Add(paragraph)
+                .SetBorder( Border.NO_BORDER);
+            table.AddCell(cell);
+            
+            var result = new Cell().Add(table).SetBorder(Border.NO_BORDER);
+
+            return result;
+        }
+
         private static Cell AddCellTitleTable(string cellName, int colSpan, int frontSize)
         {
             var paragraph = new Paragraph();
@@ -710,7 +742,7 @@ namespace ExportConsoleApp
             bool isItalic = false,
             bool isBorder = false,
             float paddingLeft = 0,
-            Color? backgroundColor = null)
+            iText.Kernel.Colors.Color? backgroundColor = null)
         {
             var text = new Text(cellName);
             text.SetFont(isBold ? FontBold : FontNormal)
@@ -873,7 +905,7 @@ namespace ExportConsoleApp
             table.AddCell(AddCellEmptyTable(3));
 
             //Cell 2
-            table.AddCell(AddCellTitleTable(cell2Name, 5, font4));
+            table.AddCell(Test(cell2Name, 5, font4));
 
             //Cell 3
             table.AddCell(AddCellTitleTable(cell3Name, 5, font4));
@@ -936,7 +968,7 @@ namespace ExportConsoleApp
             bool isBold = false,
             bool isItalic = false,
             float paddingLeft = 0,
-            Color? backgroundColor = null)
+            iText.Kernel.Colors.Color? backgroundColor = null)
         {
             #region Define Table
             const int font4 = 4;
