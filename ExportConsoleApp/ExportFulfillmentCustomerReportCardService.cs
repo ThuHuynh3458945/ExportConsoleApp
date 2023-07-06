@@ -682,55 +682,33 @@ namespace ExportConsoleApp
             return cell;
         }
 
-        private static Cell Test(string cellName, int colSpan, int frontSize)
+        private static Cell AddCellTitleTable(string cellName, int colSpan, int frontSize, int width)
         {
-            var table = new Table(5);
+            var table = new Table(colSpan);
 
-            var paragraph = new Paragraph();
-            paragraph.Add(new Text(cellName)
-                    .SetFont(FontBold)
-                    .SetFontSize(frontSize)
-                    .SetFontColor(ColorConstants.BLACK))
+            //Add cell name
+            var text = new Text(cellName);
+            text.SetFont(FontBold)
+                .SetFontSize(frontSize)
+                .SetFontColor(ColorConstants.BLACK)
                 ;
 
-            var cell = new Cell(1, 55 * colSpan - 3);
-            cell.Add(paragraph)
+            var paragraph = new Paragraph().Add(text);
+            var cell = new Cell(1,3)
+                .Add(paragraph)
+                .SetWidth(width)
+                .SetTextAlignment(TextAlignment.CENTER)
                 .SetBorder(Border.NO_BORDER)
                 .SetBorderBottom(new SolidBorder(0))
-                .SetTextAlignment(TextAlignment.CENTER)
                 ;
             table.AddCell(cell);
 
-            paragraph = new Paragraph();
-            paragraph.Add(new Text(""));
-            
-            cell = new Cell(1, 3);
-            cell.Add(paragraph)
-                .SetBorder( Border.NO_BORDER);
-            table.AddCell(cell);
-            
-            var result = new Cell().Add(table).SetBorder(Border.NO_BORDER);
-
-            return result;
-        }
-
-        private static Cell AddCellTitleTable(string cellName, int colSpan, int frontSize)
-        {
-            var paragraph = new Paragraph();
-            paragraph.Add(new Text(cellName)
-                    .SetFont(FontBold)
-                    .SetFontSize(frontSize)
-                    .SetFontColor(ColorConstants.BLACK))
-                    ;
-            
-            var cell = new Cell(1, colSpan);
-            cell.Add(paragraph)
-                .SetBorder(Border.NO_BORDER)
-                .SetBorderBottom(new SolidBorder(0))
-                .SetTextAlignment(TextAlignment.CENTER)
+            var resultCell = new Cell(1, colSpan)
+                    .Add(table)
+                    .SetBorder(Border.NO_BORDER)
                 ;
 
-            return cell;
+            return resultCell;
         }
         
         private static Cell AddCellValueTable(
@@ -905,13 +883,13 @@ namespace ExportConsoleApp
             table.AddCell(AddCellEmptyTable(3));
 
             //Cell 2
-            table.AddCell(Test(cell2Name, 5, font4));
+            table.AddCell(AddCellTitleTable(cell2Name, 5, font4, 150));
 
             //Cell 3
-            table.AddCell(AddCellTitleTable(cell3Name, 5, font4));
+            table.AddCell(AddCellTitleTable(cell3Name, 5, font4, 150));
 
             //Cell 4
-            table.AddCell(AddCellTitleTable(cell4Name, 5, font4));
+            table.AddCell(AddCellTitleTable(cell4Name, 5, font4, 150));
 
             //cell empty
             table.AddCell(AddCellEmptyTable(18));
@@ -939,19 +917,19 @@ namespace ExportConsoleApp
             for (int i = 1; i <= 3; i++)
             {
                 //Actual
-                table.AddCell(AddCellTitleTable("Actual", 1, font4));
+                table.AddCell(AddCellTitleTable("Actual", 1, font4,30));
 
                 //Projected
-                table.AddCell(AddCellTitleTable("Projected", 1, font4));
+                table.AddCell(AddCellTitleTable("Projected", 1, font4, 30));
 
                 //vs. Proj
-                table.AddCell(AddCellTitleTable("vs. Proj", 1, font4));
+                table.AddCell(AddCellTitleTable("vs. Proj", 1, font4, 30));
 
                 //Prior Yr
-                table.AddCell(AddCellTitleTable("Prior Yr", 1, font4));
+                table.AddCell(AddCellTitleTable("Prior Yr", 1, font4, 30));
 
                 //vs. PY
-                table.AddCell(AddCellTitleTable("vs. PY", 1, font4));
+                table.AddCell(AddCellTitleTable("vs. PY", 1, font4, 30));
             }
 
             //cell empty
