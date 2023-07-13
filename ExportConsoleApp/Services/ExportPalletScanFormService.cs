@@ -16,7 +16,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.Reflection;
 
-namespace ExportConsoleApp
+namespace ExportConsoleApp.Services
 {
     public class PalletScanFormHeaderEventHandler : IEventHandler
     {
@@ -275,7 +275,7 @@ namespace ExportConsoleApp
         {
             //Header Summary
             var headerBytes = BindHeaderSummaryScanForm(model);
-            if(headerBytes.Length == 0)
+            if (headerBytes.Length == 0)
             {
                 return Array.Empty<byte>();
             }
@@ -286,7 +286,7 @@ namespace ExportConsoleApp
 
             PdfDocument pdfCombined = new PdfDocument(writer);
             PdfMerger merger = new PdfMerger(pdfCombined);
-            
+
             //merge header summary
             PdfDocument pdfDocumentHeader = new PdfDocument(new PdfReader(new MemoryStream(headerBytes)));
             merger.Merge(pdfDocumentHeader, 1, pdfDocumentHeader.GetNumberOfPages());

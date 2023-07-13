@@ -4,7 +4,7 @@ using OfficeOpenXml.Style;
 using System.Drawing;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace ExportConsoleApp
+namespace ExportConsoleApp.Services
 {
     public class ExportMasterBolService
     {
@@ -516,7 +516,7 @@ namespace ExportConsoleApp
 
                     worksheet.Cells[row, col].Value = item.Origin;
                     worksheet.Cells[row, col].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
-                    
+
                     row++;
                 }
                 #endregion Bind Data

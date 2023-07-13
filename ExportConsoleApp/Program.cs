@@ -1,10 +1,9 @@
-﻿using ExportConsoleApp;
-using ExportConsoleApp.Models;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using ExportConsoleApp.Services;
 
-var service = new ExportFulfillmentCustomerReportCardService();
+var service = new InvoiceService();
 var data = service.BuildData();
-var bytes = service.ExportFulfillmentCustomerReportCard("Monster Digital Fulfillment - Customer Report Card (3/04/23)", data);
+var bytes = await service.ExportInvoiceAsync(data);
 string path = Path.Combine(@"C:\Users\nguye\Downloads\Console-App-Files", Guid.NewGuid().ToString() + ".pdf");
 File.WriteAllBytes(path, bytes);
 

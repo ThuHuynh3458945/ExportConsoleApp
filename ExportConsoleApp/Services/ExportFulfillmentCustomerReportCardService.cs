@@ -9,7 +9,7 @@ using iText.Layout.Borders;
 using iText.Layout.Element;
 using iText.Layout.Properties;
 
-namespace ExportConsoleApp
+namespace ExportConsoleApp.Services
 {
     public class ExportFulfillmentCustomerReportCardService
     {
@@ -249,7 +249,7 @@ namespace ExportConsoleApp
             return cell;
         }
 
-        private static Cell AddCellDataNameTable(string cellName, TextAlignment textAlignment , int frontSize, int colSpan)
+        private static Cell AddCellDataNameTable(string cellName, TextAlignment textAlignment, int frontSize, int colSpan)
         {
             var fontNormal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
 
@@ -343,7 +343,7 @@ namespace ExportConsoleApp
 
             return table;
         }
-        
+
         private static Table CreateSubHeader(string name)
         {
             #region Define Table
