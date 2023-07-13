@@ -13,6 +13,9 @@ namespace ExportConsoleApp.Services
 {
     public class ExportFulfillmentCustomerReportCardService
     {
+        private static PdfFont FontNormal => PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+        private static PdfFont FontBold => PdfFontFactory.CreateFont(StandardFonts.HELVETICA_BOLD);
+
         public FulfillmentCustomerReportCardModel BuildData()
         {
             var result = new FulfillmentCustomerReportCardModel
@@ -214,6 +217,202 @@ namespace ExportConsoleApp.Services
                     },
                     Average = new FulfillmentCustomerReportCardDataModel
                     {
+                        Name = "Average Daily Revenue ",
+                        DailyActual = "$33",
+                        DailyProjected = "$33",
+                        DailyActualProjected = "",
+                        DailyPriorYear = "$33",
+                        DailyActualPriorYear = "",
+                        WeeklyActual = "$33",
+                        WeeklyProjected = "$33",
+                        WeeklyActualProjected = "",
+                        WeeklyPriorYear = "$33",
+                        WeeklyActualPriorYear = "",
+                        MonthlyActual = "$33",
+                        MonthlyProjected = "$33",
+                        MonthlyActualProjected = "",
+                        MonthlyPriorYear = "$33",
+                        MonthlyActualPriorYear = ""
+                    }
+                },
+                Unit = new FulfillmentCustomerReportCardDetailModel
+                {
+                    TopPartners = new List<FulfillmentCustomerReportCardDataModel>
+                    {
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Printify",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "TeePublic",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "RedBubble",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "SenPrints",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Dreamship",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Canva",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Snow Commerce",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Gooten",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        }
+                    },
+                    OtherCustomer = new FulfillmentCustomerReportCardDataModel
+                    {
+                        Name = "All Other Customers",
+                        DailyActual = "$33",
+                        DailyProjected = "$33",
+                        DailyActualProjected = "$33",
+                        DailyPriorYear = "$33",
+                        DailyActualPriorYear = "$33",
+                        WeeklyActual = "$33",
+                        WeeklyProjected = "$33",
+                        WeeklyActualProjected = "$33",
+                        WeeklyPriorYear = "$33",
+                        WeeklyActualPriorYear = "$33",
+                        MonthlyActual = "$33",
+                        MonthlyProjected = "$33",
+                        MonthlyActualProjected = "$33",
+                        MonthlyPriorYear = "$33",
+                        MonthlyActualPriorYear = "$33"
+                    },
+                    Total = new FulfillmentCustomerReportCardDataModel
+                    {
                         Name = "Total",
                         DailyActual = "$33",
                         DailyProjected = "$33",
@@ -230,6 +429,240 @@ namespace ExportConsoleApp.Services
                         MonthlyActualProjected = "$33",
                         MonthlyPriorYear = "$33",
                         MonthlyActualPriorYear = "$33"
+                    },
+                    Average = new FulfillmentCustomerReportCardDataModel
+                    {
+                        Name = "Average Daily Revenue ",
+                        DailyActual = "$33",
+                        DailyProjected = "$33",
+                        DailyActualProjected = "",
+                        DailyPriorYear = "$33",
+                        DailyActualPriorYear = "",
+                        WeeklyActual = "$33",
+                        WeeklyProjected = "$33",
+                        WeeklyActualProjected = "",
+                        WeeklyPriorYear = "$33",
+                        WeeklyActualPriorYear = "",
+                        MonthlyActual = "$33",
+                        MonthlyProjected = "$33",
+                        MonthlyActualProjected = "",
+                        MonthlyPriorYear = "$33",
+                        MonthlyActualPriorYear = ""
+                    }
+                },
+                AverageSalePrice = new FulfillmentCustomerReportCardDetailModel
+                {
+                    TopPartners = new List<FulfillmentCustomerReportCardDataModel>
+                    {
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Printify",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "TeePublic",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "RedBubble",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "SenPrints",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Dreamship",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Canva",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Snow Commerce",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        },
+                        new FulfillmentCustomerReportCardDataModel
+                        {
+                            Name = "Gooten",
+                            DailyActual = "$33",
+                            DailyProjected = "$33",
+                            DailyActualProjected = "$33",
+                            DailyPriorYear = "$33",
+                            DailyActualPriorYear = "$33",
+                            WeeklyActual = "$33",
+                            WeeklyProjected = "$33",
+                            WeeklyActualProjected = "$33",
+                            WeeklyPriorYear = "$33",
+                            WeeklyActualPriorYear = "$33",
+                            MonthlyActual = "$33",
+                            MonthlyProjected = "$33",
+                            MonthlyActualProjected = "$33",
+                            MonthlyPriorYear = "$33",
+                            MonthlyActualPriorYear = "$33"
+                        }
+                    },
+                    OtherCustomer = new FulfillmentCustomerReportCardDataModel
+                    {
+                        Name = "All Other Customers",
+                        DailyActual = "$33",
+                        DailyProjected = "$33",
+                        DailyActualProjected = "$33",
+                        DailyPriorYear = "$33",
+                        DailyActualPriorYear = "$33",
+                        WeeklyActual = "$33",
+                        WeeklyProjected = "$33",
+                        WeeklyActualProjected = "$33",
+                        WeeklyPriorYear = "$33",
+                        WeeklyActualPriorYear = "$33",
+                        MonthlyActual = "$33",
+                        MonthlyProjected = "$33",
+                        MonthlyActualProjected = "$33",
+                        MonthlyPriorYear = "$33",
+                        MonthlyActualPriorYear = "$33"
+                    },
+                    Total = new FulfillmentCustomerReportCardDataModel
+                    {
+                        Name = "Total",
+                        DailyActual = "$33",
+                        DailyProjected = "$33",
+                        DailyActualProjected = "$33",
+                        DailyPriorYear = "$33",
+                        DailyActualPriorYear = "$33",
+                        WeeklyActual = "$33",
+                        WeeklyProjected = "$33",
+                        WeeklyActualProjected = "$33",
+                        WeeklyPriorYear = "$33",
+                        WeeklyActualPriorYear = "$33",
+                        MonthlyActual = "$33",
+                        MonthlyProjected = "$33",
+                        MonthlyActualProjected = "$33",
+                        MonthlyPriorYear = "$33",
+                        MonthlyActualPriorYear = "$33"
+                    },
+                    Average = new FulfillmentCustomerReportCardDataModel
+                    {
+                        Name = "Average Daily Revenue ",
+                        DailyActual = "$33",
+                        DailyProjected = "$33",
+                        DailyActualProjected = "",
+                        DailyPriorYear = "$33",
+                        DailyActualPriorYear = "",
+                        WeeklyActual = "$33",
+                        WeeklyProjected = "$33",
+                        WeeklyActualProjected = "",
+                        WeeklyPriorYear = "$33",
+                        WeeklyActualPriorYear = "",
+                        MonthlyActual = "$33",
+                        MonthlyProjected = "$33",
+                        MonthlyActualProjected = "",
+                        MonthlyPriorYear = "$33",
+                        MonthlyActualPriorYear = ""
                     }
                 }
             };
@@ -237,70 +670,91 @@ namespace ExportConsoleApp.Services
             return result;
         }
 
-        private static Cell AddCellEmptyTable(int colSpan, bool isSetBorder = false)
+        private static Cell AddCellEmptyTable(int colSpan, bool isBorder = false)
         {
             var paragraph = new Paragraph();
             paragraph.Add(new Text(""));
 
             var cell = new Cell(1, colSpan);
             cell.Add(paragraph)
-                .SetBorder(isSetBorder ? new SolidBorder(0) : Border.NO_BORDER);
+                .SetBorder(isBorder ? new SolidBorder(0) : Border.NO_BORDER);
 
             return cell;
         }
 
-        private static Cell AddCellDataNameTable(string cellName, TextAlignment textAlignment, int frontSize, int colSpan)
+        private static Cell AddCellTitleTable(string cellName, int colSpan, int frontSize, int width)
         {
-            var fontNormal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            var table = new Table(colSpan);
 
-            var paragraph = new Paragraph();
-            paragraph.Add(new Text(cellName)
-                    .SetFont(fontNormal)
-                    .SetFontSize(frontSize))
-                    .SetFontColor(ColorConstants.BLACK)
-                    .SetBold()
-                    ;
-
-            var cell = new Cell(1, colSpan);
-            cell.Add(paragraph)
-                .SetBorder(Border.NO_BORDER)
-                .SetTextAlignment(textAlignment)
-                .SetBorderBottom(new SolidBorder(0))
-                .SetPaddingLeft(10f)
+            //Add cell name
+            var text = new Text(cellName);
+            text.SetFont(FontBold)
+                .SetFontSize(frontSize)
+                .SetFontColor(ColorConstants.BLACK)
                 ;
 
-            return cell;
+            var paragraph = new Paragraph().Add(text);
+            var cell = new Cell(1,3)
+                .Add(paragraph)
+                .SetWidth(width)
+                .SetTextAlignment(TextAlignment.CENTER)
+                .SetBorder(Border.NO_BORDER)
+                .SetBorderBottom(new SolidBorder(0))
+                ;
+            table.AddCell(cell);
+
+            var resultCell = new Cell(1, colSpan)
+                    .Add(table)
+                    .SetBorder(Border.NO_BORDER)
+                ;
+
+            return resultCell;
         }
-
-        private static Cell AddCellTable(string cellName, int frontSize, int colSpan)
+        
+        private static Cell AddCellValueTable(
+            string cellName,
+            int colSpan,
+            int frontSize,
+            TextAlignment textAlignment = TextAlignment.CENTER,
+            bool isBold = false,
+            bool isItalic = false,
+            bool isBorder = false,
+            float paddingLeft = 0,
+            iText.Kernel.Colors.Color? backgroundColor = null)
         {
-            var fontNormal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            var text = new Text(cellName);
+            text.SetFont(isBold ? FontBold : FontNormal)
+                .SetFontSize(frontSize)
+                .SetFontColor(ColorConstants.BLACK);
 
-            var paragraph = new Paragraph();
-            paragraph.Add(new Text(cellName)
-                    .SetFont(fontNormal)
-                    .SetFontSize(frontSize))
-                    .SetFontColor(ColorConstants.BLACK)
-                    .SetBold()
-                    ;
+            var paragraph = new Paragraph().Add(text);
+            if (isItalic)
+            {
+                paragraph.SetItalic();
+            }
 
             var cell = new Cell(1, colSpan);
             cell.Add(paragraph)
+                .SetTextAlignment(textAlignment)
                 .SetBorder(Border.NO_BORDER)
-                .SetTextAlignment(TextAlignment.CENTER)
-                .SetBorderBottom(new SolidBorder(0))
+                .SetBorderBottom(isBorder ? new SolidBorder(0) : Border.NO_BORDER)
+                .SetPaddingLeft(paddingLeft)
                 .SetPaddingBottom(5)
                 ;
 
+            if (backgroundColor != null)
+            {
+                cell.SetBackgroundColor(backgroundColor);
+            }
+
             return cell;
         }
 
-        private static Table CreateHeader(string subject)
+        private static void BindHeader(Document document, string subject)
         {
             #region Define Table
             const int font7 = 7;
-
-            var fontNormal = PdfFontFactory.CreateFont(StandardFonts.HELVETICA);
+            
             var table = new Table(1);
             table.SetWidth(UnitValue.CreatePercentValue(100f));
             table.SetFixedLayout()
@@ -311,11 +765,10 @@ namespace ExportConsoleApp.Services
             //Header
             var paragraph = new Paragraph();
             paragraph.Add(new Text(subject)
-                    .SetFont(fontNormal)
+                    .SetFont(FontBold)
                     .SetFontSize(font7))
                     .SetFontColor(ColorConstants.WHITE)
                     .SetTextAlignment(TextAlignment.CENTER)
-                    .SetBold()
                     ;
 
             var cell = new Cell(1, 1);
@@ -341,10 +794,10 @@ namespace ExportConsoleApp.Services
             table.AddCell(cell);
             #endregion Bind Data
 
-            return table;
+            document.Add(table);
         }
 
-        private static Table CreateSubHeader(string name)
+        private static Table BindHeaderTable(string name)
         {
             #region Define Table
             const int font4 = 4;
@@ -368,7 +821,7 @@ namespace ExportConsoleApp.Services
                     .SetFontSize(font4))
                     .SetFontColor(ColorConstants.BLACK)
                     .SetTextAlignment(TextAlignment.CENTER)
-                    .SetBold()
+                    
                 ;
 
             var cell = new Cell(1, 1);
@@ -397,7 +850,7 @@ namespace ExportConsoleApp.Services
             return table;
         }
 
-        private static Table CreateTitleTable(string title)
+        private static Table BindTitleTable(string title)
         {
             #region Define Table
             const int font4 = 4;
@@ -430,13 +883,13 @@ namespace ExportConsoleApp.Services
             table.AddCell(AddCellEmptyTable(3));
 
             //Cell 2
-            table.AddCell(AddCellTable(cell2Name, font4, 5));
+            table.AddCell(AddCellTitleTable(cell2Name, 5, font4, 150));
 
             //Cell 3
-            table.AddCell(AddCellTable(cell3Name, font4, 5));
+            table.AddCell(AddCellTitleTable(cell3Name, 5, font4, 150));
 
             //Cell 4
-            table.AddCell(AddCellTable(cell4Name, font4, 5));
+            table.AddCell(AddCellTitleTable(cell4Name, 5, font4, 150));
 
             //cell empty
             table.AddCell(AddCellEmptyTable(18));
@@ -445,7 +898,7 @@ namespace ExportConsoleApp.Services
             return table;
         }
 
-        private static Table CreateSubTitleTable()
+        private static Table BindSubTitleTable()
         {
             #region Define Table
             const int font4 = 4;
@@ -464,19 +917,19 @@ namespace ExportConsoleApp.Services
             for (int i = 1; i <= 3; i++)
             {
                 //Actual
-                table.AddCell(AddCellTable("Actual", font4, 1));
+                table.AddCell(AddCellTitleTable("Actual", 1, font4,30));
 
                 //Projected
-                table.AddCell(AddCellTable("Projected", font4, 1));
+                table.AddCell(AddCellTitleTable("Projected", 1, font4, 30));
 
                 //vs. Proj
-                table.AddCell(AddCellTable("vs. Proj", font4, 1));
+                table.AddCell(AddCellTitleTable("vs. Proj", 1, font4, 30));
 
                 //Prior Yr
-                table.AddCell(AddCellTable("Prior Yr", font4, 1));
+                table.AddCell(AddCellTitleTable("Prior Yr", 1, font4, 30));
 
                 //vs. PY
-                table.AddCell(AddCellTable("vs. PY", font4, 1));
+                table.AddCell(AddCellTitleTable("vs. PY", 1, font4, 30));
             }
 
             //cell empty
@@ -486,7 +939,14 @@ namespace ExportConsoleApp.Services
             return table;
         }
 
-        private static Table BindDataTable(FulfillmentCustomerReportCardDataModel data, TextAlignment textAlignment)
+        private static Table BindDataTable(
+            FulfillmentCustomerReportCardDataModel data,
+            TextAlignment textAlignment,
+            bool isBorder = false,
+            bool isBold = false,
+            bool isItalic = false,
+            float paddingLeft = 0,
+            iText.Kernel.Colors.Color? backgroundColor = null)
         {
             #region Define Table
             const int font4 = 4;
@@ -499,64 +959,109 @@ namespace ExportConsoleApp.Services
 
             #region Bind Data
             //Name
-            table.AddCell(AddCellDataNameTable(data.Name, textAlignment, font4, 3));
+            table.AddCell(AddCellValueTable(data.Name, 3,font4, textAlignment, isBold, isItalic, isBorder, paddingLeft, backgroundColor));
 
             #region Daily
             //Actual
-            table.AddCell(AddCellTable(data.DailyActual, font4, 1));
+            table.AddCell(AddCellValueTable(data.DailyActual, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Projected
-            table.AddCell(AddCellTable(data.DailyProjected, font4, 1));
+            table.AddCell(AddCellValueTable(data.DailyProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. Proj
-            table.AddCell(AddCellTable(data.DailyActualProjected, font4, 1));
+            table.AddCell(AddCellValueTable(data.DailyActualProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Prior Yr
-            table.AddCell(AddCellTable(data.DailyPriorYear, font4, 1));
+            table.AddCell(AddCellValueTable(data.DailyPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. PY
-            table.AddCell(AddCellTable(data.DailyActualPriorYear, font4, 1));
+            table.AddCell(AddCellValueTable(data.DailyActualPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
             #endregion Daily
 
             #region Weekly
             //Actual
-            table.AddCell(AddCellTable(data.WeeklyActual, font4, 1));
+            table.AddCell(AddCellValueTable(data.WeeklyActual, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Projected
-            table.AddCell(AddCellTable(data.WeeklyProjected, font4, 1));
+            table.AddCell(AddCellValueTable(data.WeeklyProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. Proj
-            table.AddCell(AddCellTable(data.WeeklyActualProjected, font4, 1));
+            table.AddCell(AddCellValueTable(data.WeeklyActualProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Prior Yr
-            table.AddCell(AddCellTable(data.WeeklyPriorYear, font4, 1));
+            table.AddCell(AddCellValueTable(data.WeeklyPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. PY
-            table.AddCell(AddCellTable(data.WeeklyActualPriorYear, font4, 1));
+            table.AddCell(AddCellValueTable(data.WeeklyActualPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
             #endregion Weekly
 
             #region Monthly
             //Actual
-            table.AddCell(AddCellTable(data.MonthlyActual, font4, 1));
+            table.AddCell(AddCellValueTable(data.MonthlyActual, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Projected
-            table.AddCell(AddCellTable(data.MonthlyProjected, font4, 1));
+            table.AddCell(AddCellValueTable(data.MonthlyProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. Proj
-            table.AddCell(AddCellTable(data.MonthlyActualProjected, font4, 1));
+            table.AddCell(AddCellValueTable(data.MonthlyActualProjected, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //Prior Yr
-            table.AddCell(AddCellTable(data.MonthlyPriorYear, font4, 1));
+            table.AddCell(AddCellValueTable(data.MonthlyPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
 
             //vs. PY
-            table.AddCell(AddCellTable(data.MonthlyActualPriorYear, font4, 1));
+            table.AddCell(AddCellValueTable(data.MonthlyActualPriorYear, 1, font4, isBorder: isBorder, backgroundColor: backgroundColor));
             #endregion Monthly
 
             //cell empty
-            table.AddCell(AddCellEmptyTable(18));
+            if (data.Name != "All Other Customers" && data.Name != "Total")
+            {
+                table.AddCell(AddCellEmptyTable(18));
+            }
             #endregion Bind Data
 
             return table;
+        }
+
+        private static void BindTable(
+            Document document, 
+            FulfillmentCustomerReportCardDetailModel data, 
+            string name)
+        {
+            #region Title
+            //Header
+            var header = BindHeaderTable(name);
+            document.Add(header);
+
+            //Title
+            var title = BindTitleTable(name);
+            document.Add(title);
+
+            //Sub-Title
+            var subTitle = BindSubTitleTable();
+            document.Add(subTitle);
+            #endregion Title
+
+            //Top Partner
+            foreach (var partner in data.TopPartners)
+            {
+                var resp = BindDataTable(partner, TextAlignment.LEFT, isBorder: true, paddingLeft: 10);
+                document.Add(resp);
+            }
+
+            //All Other Customers
+            var otherCustomer= BindDataTable(data.OtherCustomer, TextAlignment.RIGHT, isBorder: true, isItalic: true);
+            document.Add(otherCustomer);
+
+            //Total
+            var total = BindDataTable(data.Total, TextAlignment.LEFT, isBold: true, paddingLeft: 5, backgroundColor: new DeviceRgb(242, 242, 242));
+            document.Add(total);
+
+            //Average Daily
+            if (name != "ASP")
+            {
+                var averageDaily = BindDataTable(data.Average, TextAlignment.LEFT, paddingLeft: 10, backgroundColor: new DeviceRgb(242, 242, 242));
+                document.Add(averageDaily);
+            }
         }
 
         public byte[] ExportFulfillmentCustomerReportCard(string subject, FulfillmentCustomerReportCardModel model)
@@ -573,37 +1078,17 @@ namespace ExportConsoleApp.Services
 
             #region Bind Data
 
-            #region Header 
-            var header = CreateHeader(subject);
-            document.Add(header);
-            #endregion Header
+            //Header 
+            BindHeader(document, subject);
 
-            #region Revenue
+            //Revenue
+            BindTable(document, model.Revenue, "Revenue");
 
-            #region Title
-            var subHeaderRevenue = CreateSubHeader("Revenue");
-            document.Add(subHeaderRevenue);
+            //Units
+            BindTable(document, model.Unit, "Units");
 
-            var titleRevenue = CreateTitleTable("Revenue");
-            document.Add(titleRevenue);
-
-            var subTitleRevenue = CreateSubTitleTable();
-            document.Add(subTitleRevenue);
-            #endregion Title
-
-            #region Bind Data
-            foreach (var partner in model.Revenue.TopPartners)
-            {
-                var data = BindDataTable(partner, TextAlignment.LEFT);
-                document.Add(data);
-            }
-
-            // All Other Customers
-            var otherCustomerRevenue = BindDataTable(model.Revenue.OtherCustomer, TextAlignment.RIGHT);
-            document.Add(otherCustomerRevenue);
-            #endregion Bind Data
-
-            #endregion Revenue 
+            //Average Sale Price
+            BindTable(document, model.AverageSalePrice, "ASP");
 
             #endregion Bind Data
 

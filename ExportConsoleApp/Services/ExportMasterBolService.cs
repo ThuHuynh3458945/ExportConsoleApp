@@ -2,7 +2,6 @@
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System.Drawing;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ExportConsoleApp.Services
 {
@@ -52,8 +51,8 @@ namespace ExportConsoleApp.Services
             worksheet.Cells[row, 1].Value = "SHIP FROM:";
             worksheet.Cells[row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
             worksheet.Cells[row, 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            worksheet.Cells[row, 1].Style.Fill.BackgroundColor.SetColor(Color.Black);
-            worksheet.Cells[row, 1].Style.Font.Color.SetColor(Color.White);
+            worksheet.Cells[row, 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Black);
+            worksheet.Cells[row, 1].Style.Font.Color.SetColor(System.Drawing.Color.White);
             worksheet.Cells[row, 1].Style.Font.Bold = true;
             worksheet.Cells[row, 1, row, 5].Merge = true;
             row++;
@@ -110,8 +109,8 @@ namespace ExportConsoleApp.Services
             worksheet.Cells[row, 1].Value = "SHIP TO:";
             worksheet.Cells[row, 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Left;
             worksheet.Cells[row, 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
-            worksheet.Cells[row, 1].Style.Fill.BackgroundColor.SetColor(Color.Black);
-            worksheet.Cells[row, 1].Style.Font.Color.SetColor(Color.White);
+            worksheet.Cells[row, 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Black);
+            worksheet.Cells[row, 1].Style.Font.Color.SetColor(System.Drawing.Color.White);
             worksheet.Cells[row, 1].Style.Font.Bold = true;
             worksheet.Cells[row, 1, row, 5].Merge = true;
             row++;
@@ -269,9 +268,9 @@ namespace ExportConsoleApp.Services
                 worksheet.Cells[row, i + 1].Value = properties[i];
 
                 worksheet.Cells[row, i + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
-                worksheet.Cells[row, i + 1].Style.Fill.BackgroundColor.SetColor(Color.Black);
+                worksheet.Cells[row, i + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Black);
                 worksheet.Cells[row, i + 1].Style.Font.Bold = true;
-                worksheet.Cells[row, i + 1].Style.Font.Color.SetColor(Color.White);
+                worksheet.Cells[row, i + 1].Style.Font.Color.SetColor(System.Drawing.Color.White);
                 worksheet.Cells[row, i + 1].Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
             }
             row++;
@@ -386,11 +385,11 @@ namespace ExportConsoleApp.Services
 
                     if (yellowProperties.Any(x => x == properties[i]))
                     {
-                        worksheet.Cells[1, i + 1, 1, i + 1].Style.Fill.BackgroundColor.SetColor(Color.Yellow);
+                        worksheet.Cells[1, i + 1, 1, i + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.Yellow);
                     }
                     else
                     {
-                        worksheet.Cells[1, i + 1, 1, i + 1].Style.Fill.BackgroundColor.SetColor(Color.White);
+                        worksheet.Cells[1, i + 1, 1, i + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.White);
                     }
                     worksheet.Cells[row, i + 1].Style.Font.Bold = true;
                     worksheet.Cells[row, i + 1].Style.Border.BorderAround(ExcelBorderStyle.Thin);
