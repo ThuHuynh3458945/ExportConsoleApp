@@ -4,7 +4,7 @@ using ExportConsoleApp.Services;
 var service = new InvoiceService();
 var data = service.BuildData();
 var bytes = await service.ExportInvoiceAsync(data);
-string path = Path.Combine(@"C:\Users\nguye\Downloads\Console-App-Files", Guid.NewGuid().ToString() + ".pdf");
+string path = Path.Combine(@"C:\Users\tuan\Downloads\Console-App-Files", Guid.NewGuid() + ".xlsx");
 File.WriteAllBytes(path, bytes);
 
 Process p = new Process();

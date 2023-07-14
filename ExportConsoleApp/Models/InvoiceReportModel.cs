@@ -2,11 +2,20 @@
 {
     public class InvoiceForReportModel
     {
+        public string PartnerId { get; set; } = null!;
         public DateTime FromDate { get; set; }
         public DateTime EndDate { get; set; }
-        public InvoiceTotalForReportModel? InvoiceTotal { get; set; }
-        public List<InvoiceDetailForReportModel> Invoices { get; set; } = new List<InvoiceDetailForReportModel>();
+
+        public MdInvoiceForReportModel? MdInvoice { get; set; }
+        public MdInvoiceForReportModel? TscInvoice { get; set; }
+        public List<TscInvoiceDetailForReportModel> OtsInvoices { get; set; } = new List<TscInvoiceDetailForReportModel>();
         public List<AuthorizedCreditForReportModel> Credits { get; set; } = new List<AuthorizedCreditForReportModel>();
+    }
+
+    public class MdInvoiceForReportModel
+    {
+        public InvoiceTotalForReportModel Total { get; set; } = new InvoiceTotalForReportModel();
+        public List<InvoiceDetailForReportModel> Details { get; set; } = new List<InvoiceDetailForReportModel>();
     }
 
     public class InvoiceTotalForReportModel
@@ -70,6 +79,28 @@
 
     public class AuthorizedCreditForReportModel
     {
+        public string InvoiceWeek { get; set; } = null!;
+        public string PartnerId { get; set; } = null!;
+        public DateTime? CreditedOnUtc { get; set; }
+        public int OrderId { get; set; }
+        public string? PartnerOrderId { get; set; }
+        public string? MiscOrderId { get; set; }
+        public decimal CreditAmount { get; set; }
+        public string? CreditReason { get; set; }
+    }
 
+    public class TscInvoiceDetailForReportModel
+    {
+        public string? MachineVendor { get; set; }
+        public string? Company { get; set; }
+        public string? PoNumber { get; set; }
+        public DateTime CancelDate { get; set; }
+        public string? Style { get; set; }
+        public string? Description { get; set; }
+        public string? Color { get; set; }
+        public DateTime PrintDate { get; set; }
+        public int PrintQty { get; set; }
+        public decimal UnitCost { get; set; }
+        public decimal InvoicePrice { get; set; }
     }
 }
