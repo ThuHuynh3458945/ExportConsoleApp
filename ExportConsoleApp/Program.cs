@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using ExportConsoleApp.Services;
 
-var service = new InvoiceService();
+var service = new ExportWeekRedBubbleInvoice();
 var data = service.BuildData();
-var bytes = await service.ExportInvoiceAsync(data);
+var bytes = await service.ExportWeekRedBubbleInvoiceAsync(data);
 string path = Path.Combine(@"C:\Users\tuan\Downloads\Console-App-Files", Guid.NewGuid() + ".xlsx");
 File.WriteAllBytes(path, bytes);
 
