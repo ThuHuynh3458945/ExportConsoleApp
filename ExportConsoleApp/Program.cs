@@ -4,7 +4,7 @@ using ExportConsoleApp.Services;
 
 var service = new ExportOrderService();
 
-var orderStatus = EOrderStatusExtend.All;
+var orderStatus = EOrderStatusExtend.InShortage;
 var orders = service.BindDataOrder();
 var orderDetails = service.BindDataOrderDetail();
 

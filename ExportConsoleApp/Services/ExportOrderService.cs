@@ -263,8 +263,7 @@ namespace ExportConsoleApp.Services
                         "SortedOn",
                         "Customer",
                         "FulfillmentStatus",
-                        "ETA Date",
-                        "TrackingNumber"
+                        "ETA Date"
                     });
                     break;
                 case EOrderStatusExtend.Packaged:
