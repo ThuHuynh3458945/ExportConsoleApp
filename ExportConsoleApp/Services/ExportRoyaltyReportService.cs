@@ -22,11 +22,11 @@ namespace ExportConsoleApp.Services
                     Groups = new List<string>(),
                     Classes = new List<string>(),
                     DesignId = string.Empty,
-                    ShipDateFrom = DateTime.Parse("2023-07-01 10:39:38.547"),
-                    ShipDateTo = DateTime.Parse("2023-07-31 10:39:38.547"),
-                    TotalQty = 1000,
-                    TotalRevenue = 1000,
-                    TotalRoyalty = 1000
+                    ShipDateFrom = DateTime.Parse("2023-06-01 10:39:38.547"),
+                    ShipDateTo = DateTime.Parse("2023-06-30 10:39:38.547"),
+                    TotalQty = 2339,
+                    TotalRevenue = (decimal)63054.28,
+                    TotalRoyalty = (decimal)10325.5849
                 },
                 SummaryDetails = new List<RoyaltyReportSummaryDetailDataModel>
                 {
@@ -57,7 +57,7 @@ namespace ExportConsoleApp.Services
                         PartnerArtId = "10431011",
                         PartnerName = "Kohls",
                         LicensorName = "Bravado",
-                        LicensorRoyalty = (decimal)5.4375,
+                        LicensorRoyalty = (decimal)27,
                         LicenseName = "BEASTIE BOYS",
                         LicenseRoyalty = (decimal)5.4375,
                         SubLicenseName = "",
@@ -66,13 +66,13 @@ namespace ExportConsoleApp.Services
                         ArtistRoyalty = (decimal)5.4375,
                         Group = "MENS",
                         Class = "TEE",
-                        VendorStyle = "2168",
-                        SizeName = "XL",
-                        ColorDesc = "Natural Mineral Wash",
-                        RetailPrice = (decimal)29.99,
-                        Wholesale = (decimal)14.5,
-                        StyleDescr = "BEASTIE BOYS COLOR LOGO Mens Natural Mineral Wash T shirt",
-                        Quantity = 1
+                        VendorStyle = "G6400",
+                        SizeName = "2X",
+                        ColorDesc = "gold",
+                        RetailPrice = (decimal)144,
+                        Wholesale = (decimal)72,
+                        StyleDescr = "COLOR LOGO Womens Sport Grey T Shirt",
+                        Quantity = 6
                     }
                 },
                 Details = new List<RoyaltyReportDetailDataModel>
@@ -86,22 +86,28 @@ namespace ExportConsoleApp.Services
                         LicensorRoyalty = (decimal)5.4375,
                         LicenseName = "BEASTIE BOYS",
                         LicenseRoyaltyType = "",
-                        LicenseRoyalty = (decimal)5.4375,
+                        LicenseRoyalty = 0,
                         SubLicenseName = "",
                         SubLicenseRoyaltyType = "",
-                        SubLicenseRoyalty = (decimal)5.4375,
+                        SubLicenseRoyalty = 0,
                         ArtistName = "",
                         ArtistRoyaltyType = "",
-                        ArtistRoyalty = (decimal)5.4375,
+                        ArtistRoyalty = 0,
                         Group = "MENS",
                         Class = "TEE",
-                        VendorStyle = "2168",
-                        SizeName = "XL",
+                        VendorStyle = "G6400",
+                        SizeName = "2X",
                         ColorDesc = "Natural Mineral Wash",
-                        RetailPrice = (decimal)29.99,
-                        Wholesale = (decimal)14.5,
-                        StyleDescr = "BEASTIE BOYS COLOR LOGO Mens Natural Mineral Wash T shirt",
-                        Quantity = 1
+                        RetailPrice = (decimal)24,
+                        Wholesale = (decimal)12,
+                        OrderId = 20415550,
+                        Xid = "6347794611_1",
+                        StyleDescr = "COLOR LOGO Womens Sport Grey T Shirt",
+                        PartnerSku = "46944138",
+                        Sku = "002-077-005",
+                        Quantity = 1,
+                        SortedOnUtc = DateTime.Parse("2023-06-17 10:39:38.547"),
+                        ShippingCountry = "US"
                     },
                     new RoyaltyReportDetailDataModel
                     {
@@ -112,22 +118,28 @@ namespace ExportConsoleApp.Services
                         LicensorRoyalty = (decimal)5.4375,
                         LicenseName = "BEASTIE BOYS",
                         LicenseRoyaltyType = "",
-                        LicenseRoyalty = (decimal)5.4375,
+                        LicenseRoyalty = 0,
                         SubLicenseName = "",
                         SubLicenseRoyaltyType = "",
-                        SubLicenseRoyalty = (decimal)5.4375,
+                        SubLicenseRoyalty = 0,
                         ArtistName = "",
                         ArtistRoyaltyType = "",
-                        ArtistRoyalty = (decimal)5.4375,
+                        ArtistRoyalty = 0,
                         Group = "MENS",
                         Class = "TEE",
-                        VendorStyle = "2168",
-                        SizeName = "XL",
+                        VendorStyle = "G6400",
+                        SizeName = "2X",
                         ColorDesc = "Natural Mineral Wash",
-                        RetailPrice = (decimal)29.99,
-                        Wholesale = (decimal)14.5,
-                        StyleDescr = "BEASTIE BOYS COLOR LOGO Mens Natural Mineral Wash T shirt",
-                        Quantity = 1
+                        RetailPrice = (decimal)24,
+                        Wholesale = (decimal)12,
+                        OrderId = 20480913,
+                        Xid = "6348690712_1",
+                        StyleDescr = "COLOR LOGO Womens Sport Grey T Shirt",
+                        PartnerSku = "46944138",
+                        Sku = "002-077-005",
+                        Quantity = 1,
+                        SortedOnUtc = DateTime.Parse("2023-06-21 10:39:38.547"),
+                        ShippingCountry = "US"
                     }
                 }
             };
@@ -350,11 +362,11 @@ namespace ExportConsoleApp.Services
                 worksheet.Cells[row, col].Style.Numberformat.Format = "$#,##0.00";
                 col++;
                 
-                worksheet.Cells[row, col].Value = item.StyleDescr;
-                col++;
-
                 worksheet.Cells[row, col].Value = item.Wholesale;
                 worksheet.Cells[row, col].Style.Numberformat.Format = "$#,##0.00";
+                col++;
+
+                worksheet.Cells[row, col].Value = item.StyleDescr;
                 col++;
 
                 worksheet.Cells[row, col].Value = item.Quantity;
@@ -556,6 +568,7 @@ namespace ExportConsoleApp.Services
                 col++;
 
                 worksheet.Cells[row, col].Value = item.Quantity;
+                col++;
 
                 worksheet.Cells[row, col].Value = !item.SortedOnUtc.HasValue
                     ? string.Empty
