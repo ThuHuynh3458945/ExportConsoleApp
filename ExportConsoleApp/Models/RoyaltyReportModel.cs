@@ -22,6 +22,7 @@
 
         public int TotalQty { get; set; }
         public decimal TotalRevenue { get; set; }
+        public decimal WholesaleTotal { get; set; }
         public decimal TotalRoyalty { get; set; }
     }
 

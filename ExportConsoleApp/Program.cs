@@ -9,9 +9,9 @@ var service = new ExportRoyaltyReportService();
 
 //Factory
 var data = service.BindData();
-var bytes = await service.ExportRoyaltyReportAsync(data);
+var bytes = await service.ExportRoyaltyReportAsync(data,true);
 
-string path = Path.Combine(@"C:\Users\tuan\Downloads\Console-App-Files", Guid.NewGuid() + ".xlsx");
+string path = Path.Combine(@"C:\Users\nguye\Downloads\Console-App-Files", Guid.NewGuid() + ".xlsx");
 File.WriteAllBytes(path, bytes);
 
 Process p = new Process();

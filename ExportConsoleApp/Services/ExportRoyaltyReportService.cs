@@ -51,7 +51,7 @@ namespace ExportConsoleApp.Services
                         Wholesale = (decimal)14.5,
                         StyleDescr = "BEASTIE BOYS COLOR LOGO Mens Natural Mineral Wash T shirt",
                         Quantity = 1
-                    }, 
+                    },
                     new RoyaltyReportSummaryDetailDataModel
                     {
                         PartnerArtId = "10431011",
@@ -290,7 +290,7 @@ namespace ExportConsoleApp.Services
                 "Description",
                 "Qty"
             };
-            
+
             for (int i = 0; i < titles.Count; i++)
             {
                 worksheet.Cells[row, i + 1].Value = titles[i];
@@ -319,7 +319,7 @@ namespace ExportConsoleApp.Services
                 col++;
 
                 worksheet.Cells[row, col].Value = item.LicensorRoyalty;
-                worksheet.Cells[row , col].Style.Numberformat.Format = "$#,##0.00";
+                worksheet.Cells[row, col].Style.Numberformat.Format = "$#,##0.00";
                 col++;
 
                 worksheet.Cells[row, col].Value = item.LicenseName;
@@ -361,7 +361,7 @@ namespace ExportConsoleApp.Services
                 worksheet.Cells[row, col].Value = item.RetailPrice;
                 worksheet.Cells[row, col].Style.Numberformat.Format = "$#,##0.00";
                 col++;
-                
+
                 worksheet.Cells[row, col].Value = item.Wholesale;
                 worksheet.Cells[row, col].Style.Numberformat.Format = "$#,##0.00";
                 col++;
@@ -403,7 +403,7 @@ namespace ExportConsoleApp.Services
 
             worksheet.Cells[row, colTotal].Value = items.Sum(x => x.Wholesale);
             worksheet.Cells[row, colTotal].Style.Numberformat.Format = "$#,##0.00";
-            colTotal +=2 ;
+            colTotal += 2;
 
             worksheet.Cells[row, colTotal].Value = items.Sum(x => x.Quantity);
             worksheet.Cells[row, colTotal].Style.Numberformat.Format = "$#,##0.00";
@@ -632,18 +632,316 @@ namespace ExportConsoleApp.Services
             worksheet.Cells.AutoFitColumns();
         }
 
-        public async Task<byte[]> ExportRoyaltyReportAsync(RoyaltyReportModel data)
+        private static void BindPhilcosSummarySheet(
+            ExcelPackage xlPackage,
+            RoyaltyReportModel data,
+            bool isInvoiceSheet)
+        {
+            var sheetName = isInvoiceSheet ? "Summary (Invoice)" : "Summary (PO)";
+            var worksheet = xlPackage.Workbook.Worksheets.Add(sheetName);
+            int row = 1;
+
+            #region Summary
+
+            #region Bind Logo
+            #endregion Bind Logo
+
+            #region Add Parameters
+            var shipDateValue = data.Summary.ShipDateFrom?.ToString("MM/dd/yyyy");
+            if (data.Summary.ShipDateFrom.HasValue && !data.Summary.ShipDateTo.HasValue)
+            {
+                shipDateValue += " - " + DateTime.UtcNow.ToString("MM/dd/yyyy");
+            }
+            else if (!data.Summary.ShipDateFrom.HasValue && data.Summary.ShipDateTo.HasValue)
+            {
+                shipDateValue += $"<= {data.Summary.ShipDateTo.Value.ToString("MM/dd/yyyy")}";
+            }
+            else if (data.Summary.ShipDateFrom.HasValue && data.Summary.ShipDateTo.HasValue)
+            {
+                shipDateValue += $" - {data.Summary.ShipDateTo.Value.ToString("MM/dd/yyyy")}";
+            }
+
+            var paramHeaderRange = worksheet.Cells[row, 4, 1, 5];
+            paramHeaderRange.Value = shipDateValue;
+            paramHeaderRange.Style.Font.Bold = true;
+            paramHeaderRange.Merge = true;
+            paramHeaderRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            paramHeaderRange.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(184, 204, 228));
+            paramHeaderRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            row++;
+
+            worksheet.Cells[row, 4].Value = "Licensor";
+            worksheet.Cells[row, 5].Value = data.Summary.LicensorNames.Any() ? data.Summary.LicensorNames.JoinComma(true) : "All Licensors";
+            row++;
+
+            worksheet.Cells[row, 4].Value = "License";
+            worksheet.Cells[row, 5].Value = data.Summary.LicenseNames.Any() ? data.Summary.LicenseNames.JoinComma(true) : "All Licenses";
+            row++;
+
+            worksheet.Cells[row, 4].Value = "Sub-License";
+            worksheet.Cells[row, 5].Value = data.Summary.SubLicenseNames.Any() ? data.Summary.SubLicenseNames.JoinComma(true) : "All Sub-Licenses";
+            row++;
+
+            worksheet.Cells[row, 4].Value = "Artist";
+            worksheet.Cells[row, 5].Value = data.Summary.ArtistNames.Any() ? data.Summary.ArtistNames.JoinComma(true) : "All Artists";
+            row++;
+
+            worksheet.Cells[row, 4].Value = "Ship Date";
+            worksheet.Cells[row, 5].Value = shipDateValue;
+            row++;
+
+            worksheet.Cells[row, 4].Value = "Style Group";
+            worksheet.Cells[row, 5].Value = data.Summary.Groups.Any() ? data.Summary.Groups.JoinComma(true) : "All Group Styles";
+            row++;
+
+            worksheet.Cells[row, 4].Value = "Style Category";
+            worksheet.Cells[row, 5].Value = data.Summary.Classes.Any() ? data.Summary.Classes.JoinComma(true) : "All Style Categories";
+
+            var paramTableRange = worksheet.Cells[1, 4, row, 5];
+            paramTableRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+            paramTableRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            paramTableRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+            paramTableRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+            #endregion Add Parameters
+
+            #region Add Bill to
+            var rangeBillTo = worksheet.Cells[row, 1, row, 2];
+            rangeBillTo.Value = "BILL TO";
+            rangeBillTo.Style.WrapText = true;
+            rangeBillTo.Merge = true;
+            rangeBillTo.Style.Font.Bold = true;
+            rangeBillTo.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+            rangeBillTo.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            rangeBillTo.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            rangeBillTo.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            rangeBillTo.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(184, 204, 228));
+            worksheet.Row(row).Height = 30;
+            row++;
+
+            var rangeAddress = worksheet.Cells[row, 1, row, 2];
+            rangeAddress.Value = "Philcos Enterpriser USA, Inc.\r\n1501 East Robinson Street,\r\nOrlando, FL 32801";
+            rangeAddress.Style.WrapText = true;
+            rangeAddress.Merge = true;
+            rangeAddress.Style.Border.BorderAround(ExcelBorderStyle.Thin);
+            rangeAddress.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            rangeAddress.Style.VerticalAlignment = ExcelVerticalAlignment.Center;
+            worksheet.Row(row).Height = 60;
+            row += 3;
+            #endregion Add Bill to
+
+            #region Add Summary
+
+            var summaryToCol = isInvoiceSheet ? 5 : 4;
+            var summaryHeaderRange = worksheet.Cells[row, 1, row, summaryToCol];
+            summaryHeaderRange.Value = "Summary";
+            summaryHeaderRange.Style.Font.Bold = true;
+            summaryHeaderRange.Merge = true;
+            summaryHeaderRange.Style.Font.Size = 12;
+            summaryHeaderRange.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            summaryHeaderRange.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(184, 204, 228));
+            summaryHeaderRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            row++;
+
+            int col = 1;
+            worksheet.Cells[row, col].Value = "Qty";
+            worksheet.Cells[row, col].Style.Font.Bold = true;
+            worksheet.Cells[row + 1, col].Value = data.Summary.TotalQty;
+            worksheet.Cells[row + 1, col].Style.Numberformat.Format = "#,##0";
+            col++;
+
+            worksheet.Cells[row, col].Value = "Total Revenue";
+            worksheet.Cells[row, col].Style.Font.Bold = true;
+            worksheet.Cells[row + 1, col].Value = data.Summary.TotalRevenue;
+            worksheet.Cells[row + 1, col].Style.Numberformat.Format = "$#,##0.00";
+            col++;
+
+            worksheet.Cells[row, col].Value = "Wholesale Total";
+            worksheet.Cells[row, col].Style.Font.Bold = true;
+            worksheet.Cells[row + 1, col].Value = data.Summary.WholesaleTotal;
+            worksheet.Cells[row + 1, col].Style.Numberformat.Format = "$#,##0.00";
+            col++;
+
+            worksheet.Cells[row, col].Value = "Total Royalty";
+            worksheet.Cells[row, col].Style.Font.Bold = true;
+            worksheet.Cells[row + 1, col].Value = data.Summary.TotalRoyalty;
+            worksheet.Cells[row + 1, col].Style.Numberformat.Format = "$#,##0.00";
+
+            if (isInvoiceSheet)
+            {
+                col++;
+                worksheet.Cells[row, col].Value = "Invoice Total";
+                worksheet.Cells[row, col].Style.Font.Bold = true;
+
+                worksheet.Cells[row + 1, col].Formula = $"{worksheet.Cells[row + 1, col - 2].Address}-{worksheet.Cells[row + 1, col - 1].Address}";
+                worksheet.Cells[row + 1, col].Style.Numberformat.Format = "$#,##0.00";
+            }
+
+            var summaryTableRange = worksheet.Cells[row - 1, 1, row + 1, summaryToCol];
+            summaryTableRange.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+            summaryTableRange.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            summaryTableRange.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+            summaryTableRange.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+            summaryTableRange.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            row += 3;
+            #endregion Add Summary
+
+            #endregion Summary
+
+            #region Bind Title
+            var titles = new List<string>
+            {
+                "Partner Art #",
+                "Retailer",
+                "Licensor Royalty",
+                "License",
+                "Size",
+                "Color",
+                "Retail Price",
+                "Wholesale Price",
+            };
+
+            if (isInvoiceSheet)
+            {
+                titles.Add("Invoice Total");
+            }
+
+            titles.AddRange(new List<string> { "Description", "Qty" });
+
+            for (int i = 0; i < titles.Count; i++)
+            {
+                worksheet.Cells[row, i + 1].Value = titles[i];
+                worksheet.Cells[row, i + 1].Style.Font.Bold = true;
+                worksheet.Cells[row, i + 1].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                worksheet.Cells[row, i + 1].Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(184, 204, 228));
+            }
+            worksheet.View.FreezePanes(row + 1, 1);
+            row++;
+            #endregion Bind Title
+
+            #region Bind Data
+
+            #region Bind Items
+
+            var items = data.SummaryDetails;
+            foreach (var item in items)
+            {
+                var colDetail = 1;
+
+                worksheet.Cells[row, colDetail].Value = item.PartnerArtId;
+                colDetail++;
+
+                worksheet.Cells[row, colDetail].Value = item.PartnerName;
+                colDetail++;
+
+                worksheet.Cells[row, colDetail].Value = item.LicensorRoyalty;
+                worksheet.Cells[row, colDetail].Style.Numberformat.Format = "$#,##0.00";
+                colDetail++;
+
+                worksheet.Cells[row, colDetail].Value = item.LicenseName;
+                colDetail++;
+
+                worksheet.Cells[row, colDetail].Value = item.SizeName;
+                colDetail++;
+
+                worksheet.Cells[row, colDetail].Value = item.ColorDesc;
+                colDetail++;
+
+                worksheet.Cells[row, colDetail].Value = item.RetailPrice;
+                worksheet.Cells[row, colDetail].Style.Numberformat.Format = "$#,##0.00";
+                colDetail++;
+
+                worksheet.Cells[row, colDetail].Value = item.Wholesale;
+                worksheet.Cells[row, colDetail].Style.Numberformat.Format = "$#,##0.00";
+                colDetail++;
+
+                if (isInvoiceSheet)
+                {
+                    worksheet.Cells[row, colDetail].Formula = $"{worksheet.Cells[row, colDetail - 2].Address}-{worksheet.Cells[row, colDetail - 1].Address}";
+                    worksheet.Cells[row, colDetail].Style.Numberformat.Format = "$#,##0.00";
+                    colDetail++;
+                }
+
+                worksheet.Cells[row, colDetail].Value = item.StyleDescr;
+                colDetail++;
+
+                worksheet.Cells[row, colDetail].Value = item.Quantity;
+
+                row++;
+            }
+            #endregion Bind Items
+
+            #region Bind Total
+            var colTotal = 1;
+
+            worksheet.Cells[row, colTotal].Value = "Totals";
+            colTotal += 2;
+
+            worksheet.Cells[row, colTotal].Value = items.Sum(x => x.LicensorRoyalty);
+            worksheet.Cells[row, colTotal].Style.Numberformat.Format = "$#,##0.00";
+            colTotal += 4;
+
+            worksheet.Cells[row, colTotal].Value = items.Sum(x => x.RetailPrice);
+            worksheet.Cells[row, colTotal].Style.Numberformat.Format = "$#,##0.00";
+            colTotal++;
+
+            worksheet.Cells[row, colTotal].Value = items.Sum(x => x.Wholesale);
+            worksheet.Cells[row, colTotal].Style.Numberformat.Format = "$#,##0.00";
+
+            if (isInvoiceSheet)
+            {
+                colTotal++;
+                worksheet.Cells[row, colTotal].Formula = $"{worksheet.Cells[row, colTotal - 2].Address}-{worksheet.Cells[row, colTotal - 1].Address}";
+                worksheet.Cells[row, colTotal].Style.Numberformat.Format = "$#,##0.00";
+            }
+            colTotal += 2;
+
+            worksheet.Cells[row, colTotal].Value = items.Sum(x => x.Quantity);
+            worksheet.Cells[row, colTotal].Style.Numberformat.Format = "$#,##0.00";
+
+            var rangeTotal = worksheet.Cells[row, 1, row, titles.Count];
+            rangeTotal.Style.Font.Bold = true;
+            rangeTotal.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            rangeTotal.Style.Fill.BackgroundColor.SetColor(System.Drawing.Color.FromArgb(170, 170, 170));
+            #endregion Bind Total
+
+            var range = worksheet.Cells[row - items.Count - 1, 1, row, titles.Count];
+            range.Style.Border.Left.Style = ExcelBorderStyle.Thin;
+            range.Style.Border.Right.Style = ExcelBorderStyle.Thin;
+            range.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
+            range.Style.Border.Top.Style = ExcelBorderStyle.Thin;
+            range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+            #endregion Bind Data
+
+            worksheet.Cells.AutoFitColumns();
+
+            worksheet.Cells["A1:B1"].AutoFitColumns(15);
+            worksheet.Cells["C1"].AutoFitColumns(25);
+        }
+
+        public async Task<byte[]> ExportRoyaltyReportAsync(RoyaltyReportModel data, bool isPhilcosLicensor)
         {
             using var stream = new MemoryStream();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             using (var xlPackage = new ExcelPackage(stream))
             {
-                //Bind Summary sheet
-                BindSummarySheet(xlPackage, data.Summary);
-                //Bind Summary Detail sheet
-                BindSummaryDetailSheet(xlPackage, data.SummaryDetails);
-                //Bind Detail sheet
-                BindDetailSheet(xlPackage, data.Details);
+                if (isPhilcosLicensor)
+                {
+                    //Bind PO sheet
+                    BindPhilcosSummarySheet(xlPackage, data, false);
+                    //Bind Invoice sheet
+                    BindPhilcosSummarySheet(xlPackage, data, true);
+                    //Bind Detail sheet
+                    BindDetailSheet(xlPackage, data.Details);
+                }
+                else
+                {
+                    //Bind Summary sheet
+                    BindSummarySheet(xlPackage, data.Summary);
+                    //Bind Summary Detail sheet
+                    BindSummaryDetailSheet(xlPackage, data.SummaryDetails);
+                    //Bind Detail sheet
+                    BindDetailSheet(xlPackage, data.Details);
+                }
 
                 await xlPackage.SaveAsync();
             }
