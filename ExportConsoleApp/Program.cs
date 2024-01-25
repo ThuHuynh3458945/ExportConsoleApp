@@ -24,31 +24,32 @@ var service = new ExportRoyaltyReportService();
 
 
 // path to your excel file
-string path = "C:\\Users\\ThuHuynh.AzureAD\\Downloads\\Thu-Test-Copy1-20240118-0649.xlsx";
+string path = "C:\\Users\\ThuHuynh.AzureAD\\Downloads\\test intro foreword.xlsx";
 FileInfo fileInfo = new FileInfo(path);
-
 ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-ExcelPackage package = new ExcelPackage(fileInfo);
-var worksheets = package.Workbook.Worksheets.ToList();
+using (var pck = new ExcelPackage(fileInfo))
+{
+    var ws = pck.Workbook.Worksheets.FirstOrDefault();
+    var cols = ws.Dimension.Columns;
+    var index = 1;
+    for (int row = ws.Dimension.End.Row - ws.Dimension.Start.Row + 1; row > 1; row--)
+    {
+        var isEmptyRow = !(ws.Cells[row, 1, row, cols].ToList()).Any(x => x.Value != null);
+        if (isEmptyRow)
+        {
+            continue;
+        }
 
-// get number of rows and columns in the sheet
-
- int index = 0;
- foreach (var ws in worksheets)
- {
-     int rows = ws.Dimension.Rows; // 20
-    var ws2 = package.Workbook.Worksheets.Add($"Copy-{index}",
-        ws);
-    ws2.Cells[rows + 1, 1].Value = "AAAA";
-    index++;
- }
-
- package.Save();
+        index = row;
+        break;
+    }
+}
 
 Process p = new Process();
 p.StartInfo.FileName = path;
 p.StartInfo.UseShellExecute = true;
 p.Start();
 
+p.WaitForExit();
 
 
