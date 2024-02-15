@@ -1,4 +1,5 @@
-﻿using ExportConsoleApp.Helpers;
+﻿using System.Runtime.InteropServices.JavaScript;
+using ExportConsoleApp.Helpers;
 using ExportConsoleApp.Heplers;
 using ExportConsoleApp.Models;
 using OfficeOpenXml;
@@ -947,6 +948,37 @@ namespace ExportConsoleApp.Services
             }
 
             return stream.ToArray();
+        }
+
+        public async Task<string> Method1()
+        {
+      
+                await Task.Run(() =>
+                {
+
+                    for (int i = 0; i < 100; i++)
+                    {
+                        Console.WriteLine(" Method 1");
+                        // Do something
+                        Task.Delay(100).Wait();
+                    }
+                   
+                });
+                return "";
+        }
+        public async Task<int> Method2()
+        {
+            await Task.Run(() =>
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    Console.WriteLine(" Method 2");
+                    // Do something
+                    Task.Delay(100).Wait();
+                }
+               
+            });
+            return 1;
         }
     }
 }
